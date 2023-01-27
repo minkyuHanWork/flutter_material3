@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material3/provider/primary_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const List<String> paletteStringList = <String>[

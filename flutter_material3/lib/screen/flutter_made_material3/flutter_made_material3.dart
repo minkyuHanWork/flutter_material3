@@ -1,25 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material3/screen/flutter_made_material3/widget/primary_palette_selector.dart';
+import 'package:flutter_material3/provider/theme_mode_provider.dart';
 import 'package:flutter_material3/screen/flutter_made_material3/widget/theme_switch_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FlutterMadeMaterial3 extends ConsumerWidget {
-  const FlutterMadeMaterial3({super.key});
+import 'widget/buttons/buttons.dart';
+
+class FlutterMadeMaterial3 extends ConsumerStatefulWidget {
+  const FlutterMadeMaterial3({super.key, required this.themeMode});
+
+  final ThemeMode themeMode;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FlutterMadeMaterial3State();
+}
+
+class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Material3"),
-        actions: [const ThemeSwitchButton(), PrimaryPaletteSelector()],
+        actions: const [ThemeSwitchButton()],
       ),
-      body: Center(
-        child: Column(),
+      body: Column(
+        children: [
+          _standardWidget(_buttons(), 'Common buttons'),
+          _standardWidget(
+              const FloatingActionButtonSet(), 'Floating action buttons'),
+          _standardWidget(
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.settings_outlined),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.settings_outlined),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.settings_outlined),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.settings_outlined),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              'icon buttons')
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _standardWidget(Widget body, String text) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 30),
+        Text(text),
+        const SizedBox(height: 10),
+        Container(
+          color:
+              widget.themeMode == ThemeMode.light ? Colors.white : Colors.black,
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: body,
+        )
+      ],
+    );
+  }
+
+  Widget _buttons() {
+    return Column(
+      children: const [
+        ElevatedButtonSet(),
+        FilledButtonSet(),
+        FilledTonalButtonSet(),
+        OutlinedButtonSet(),
+        TextButtonSet(),
+      ],
     );
   }
 }
