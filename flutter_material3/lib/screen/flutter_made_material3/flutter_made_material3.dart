@@ -19,41 +19,19 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       appBar: AppBar(
         title: const Text("Material3"),
         actions: const [ThemeSwitchButton()],
       ),
-      body: Column(
+      body: ListView(
         children: [
           _standardWidget(_buttons(), 'Common buttons'),
           _standardWidget(
               const FloatingActionButtonSet(), 'Floating action buttons'),
-          _standardWidget(
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings_outlined),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings_outlined),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings_outlined),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings_outlined),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              'icon buttons')
+          _standardWidget(const IconButtonSet(), 'icon buttons'),
+          _standardWidget(SegmentedButtonSet(), 'Segemented buttons'),
+          const Placeholder()
         ],
       ),
     );
@@ -67,6 +45,7 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
         Text(text),
         const SizedBox(height: 10),
         Container(
+          width: double.infinity,
           color:
               widget.themeMode == ThemeMode.light ? Colors.white : Colors.black,
           padding: const EdgeInsets.symmetric(vertical: 15),
