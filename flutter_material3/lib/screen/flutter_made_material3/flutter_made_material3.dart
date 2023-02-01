@@ -4,6 +4,7 @@ import 'package:flutter_material3/screen/flutter_made_material3/widget/theme_swi
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widget/buttons/buttons.dart';
+import 'widget/custom_badge.dart';
 
 class FlutterMadeMaterial3 extends ConsumerStatefulWidget {
   const FlutterMadeMaterial3({super.key, required this.themeMode});
@@ -24,15 +25,33 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
         title: const Text("Material3"),
         actions: const [ThemeSwitchButton()],
       ),
-      body: ListView(
-        children: [
-          _standardWidget(_buttons(), 'Common buttons'),
-          _standardWidget(
-              const FloatingActionButtonSet(), 'Floating action buttons'),
-          _standardWidget(const IconButtonSet(), 'icon buttons'),
-          _standardWidget(SegmentedButtonSet(), 'Segemented buttons'),
-          const Placeholder()
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                Text('Actions',
+                    style: Theme.of(context).textTheme.headlineMedium),
+                _standardWidget(_buttons(), 'Common buttons'),
+                _standardWidget(
+                    const FloatingActionButtonSet(), 'Floating action buttons'),
+                _standardWidget(const IconButtonSet(), 'Icon buttons'),
+                _standardWidget(
+                    const SegmentedButtonSet(), 'Segemented buttons'),
+              ],
+            ),
+            _standardWidget(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomBadge(),
+                  ],
+                ),
+                'Badges'),
+            const Placeholder()
+          ],
+        ),
       ),
     );
   }
@@ -42,12 +61,18 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 30),
-        Text(text),
+        Text(text, style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(height: 10),
         Container(
           width: double.infinity,
-          color:
-              widget.themeMode == ThemeMode.light ? Colors.white : Colors.black,
+          decoration: BoxDecoration(
+            color: widget.themeMode == ThemeMode.light
+                ? Colors.white
+                : Colors.black,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+                color: Theme.of(context).colorScheme.outline.withOpacity(0.5)),
+          ),
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: body,
         )
@@ -59,9 +84,13 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
     return Column(
       children: const [
         ElevatedButtonSet(),
+        SizedBox(height: 10),
         FilledButtonSet(),
+        SizedBox(height: 10),
         FilledTonalButtonSet(),
+        SizedBox(height: 10),
         OutlinedButtonSet(),
+        SizedBox(height: 10),
         TextButtonSet(),
       ],
     );

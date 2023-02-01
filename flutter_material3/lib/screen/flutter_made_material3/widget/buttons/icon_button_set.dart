@@ -14,6 +14,7 @@ class IconButtonSet extends StatelessWidget {
               isEnabled: true,
               tooltip: 'Standard',
             ),
+            SizedBox(height: 10),
             IconToggleButton(
               isEnabled: false,
               tooltip: 'Standard(disabled)',

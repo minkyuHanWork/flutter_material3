@@ -30,6 +30,8 @@ class _SingleChoicSegmentButtonState extends State<SingleChoicSegmentButton> {
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<Calendar>(
+      showSelectedIcon: true,
+      selectedIcon: const Icon(Icons.check_circle),
       segments: const [
         ButtonSegment<Calendar>(
           value: Calendar.day,
