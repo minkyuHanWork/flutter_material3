@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material3/provider/theme_mode_provider.dart';
+import 'package:flutter_material3/screen/flutter_made_material3/widget/navigation/m3_navigation_bar.dart';
 import 'package:flutter_material3/screen/flutter_made_material3/widget/theme_switch_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widget/buttons/buttons.dart';
-import 'widget/custom_badge.dart';
 
 class FlutterMadeMaterial3 extends ConsumerStatefulWidget {
   const FlutterMadeMaterial3({super.key, required this.themeMode});
@@ -39,16 +38,9 @@ class _FlutterMadeMaterial3State extends ConsumerState<FlutterMadeMaterial3> {
                 _standardWidget(const IconButtonSet(), 'Icon buttons'),
                 _standardWidget(
                     const SegmentedButtonSet(), 'Segemented buttons'),
+                _standardWidget(const M3NavigationBar(), 'Segemented buttons'),
               ],
             ),
-            _standardWidget(
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomBadge(),
-                  ],
-                ),
-                'Badges'),
             const Placeholder()
           ],
         ),
